@@ -25,7 +25,7 @@
 # * curl exit
 #
 set -euo pipefail # Stop on errors, undefined vars and if pipelines error
-set -x            # Log all statements for debugging
+# set -x            # Log all statements for debugging
 
 SNOWFLAKE_ACCOUNT=""
 SNOWFLAKE_USER=""
