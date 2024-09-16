@@ -48,7 +48,7 @@ check_bin "openssl" "openssl"
 check_bin "tr" "tr"
 
 # Source: https://docs.snowflake.com/en/user-guide/key-pair-auth#verify-the-user-s-public-key-fingerprint
-KEY_SHA256="SHA256:$(openssl rsa -in "$SECRET_PATH" -pubout -outform DER 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"
+PUBKEY_SHA256="SHA256:$(openssl rsa -in "$SECRET_PATH" -pubout -outform DER 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"
 
 # This is for compatibility purposes, old bash does not do ^^
 _ACCOUNT_UPPERCASE=$(echo "$SNOWFLAKE_ACCOUNT" | tr '[:lower:]' '[:upper:]') # tr should be fine here, the data should be ascii. Awk is a heavier dependency.
@@ -67,7 +67,7 @@ JWT=$(
   jwt encode \
     --alg RS256 \
     --secret @"$SECRET_PATH" \
-    --iss "${_ACCOUNT_UPPERCASE}.${_USERNAME_UPPERCASE}.$KEY_SHA256" \
+    --iss "${_ACCOUNT_UPPERCASE}.${_USERNAME_UPPERCASE}.$PUBKEY_SHA256" \
     --sub "${_ACCOUNT_UPPERCASE}.${SNOWFLAKE_USER}" \
     --exp=$((now = $(date +"%s"), now + 30)) # Make a short-lived token
 )
