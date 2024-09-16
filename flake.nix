@@ -72,9 +72,6 @@
               shellcheck = {
                 enable = true;
               };
-              shfmt = {
-                enable = true;
-              };
             };
           };
 
