@@ -38,20 +38,28 @@
         "x86_64-darwin"
       ];
       perSystem =
-        { config, pkgs, ... }:
+        {
+          config,
+          pkgs,
+          self',
+          ...
+        }:
+        let
+          pkgDeps = builtins.attrValues {
+            inherit (pkgs)
+              curl
+              jwt-cli
+              coreutils-full
+              openssl
+              ;
+
+          };
+        in
         {
           packages.default = pkgs.writeShellApplication {
             name = "spcs-jwt-connect";
 
-            runtimeInputs = builtins.attrValues {
-              inherit (pkgs)
-                curl
-                jwt-cli
-                coreutils-full
-                openssl
-                ;
-
-            };
+            runtimeInputs = pkgDeps;
             text = builtins.readFile ./src/spcs-jwt-connect.sh;
           };
 
@@ -89,6 +97,7 @@
                   '';
               }
             ];
+            packages = pkgDeps;
           };
 
           devShells.pre-commit = config.pre-commit.devShell;
