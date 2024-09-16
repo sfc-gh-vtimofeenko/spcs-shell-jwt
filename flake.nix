@@ -38,8 +38,22 @@
         "x86_64-darwin"
       ];
       perSystem =
-        { config, ... }:
+        { config, pkgs, ... }:
         {
+          packages.default = pkgs.writeShellApplication {
+            name = "spcs-jwt-connect";
+
+            runtimeInputs = builtins.attrValues {
+              inherit (pkgs)
+                curl
+                jwt-cli
+                coreutils-full
+                openssl
+                ;
+
+            };
+            text = builtins.readFile ./src/spcs-jwt-connect.sh;
+          };
 
           treefmt = {
             programs = {
