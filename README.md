@@ -12,6 +12,12 @@ dependencies are not available.
 
 `nix` is optional, but it is used for the CI and development.
 
+# Limitations
+
+1. Passphrase-protected keys are not supported. If the key is protected by a
+   passphrase, use Snowflake CLI to generate the JWT and remaining curl commands
+2. `OPENSSH PRIVATE KEY` keys are not supported, the key must be RSA
+
 # See also
 
 1. [Sample python code to access SPCS endpoint from the documentation][tutorial]
