@@ -48,6 +48,7 @@ check_bin "openssl" "openssl"
 check_bin "tr" "tr"
 
 # Source: https://docs.snowflake.com/en/user-guide/key-pair-auth#verify-the-user-s-public-key-fingerprint
+# If the script stops here, double check the key format. Should be just RSA key, not OPENSSH
 PUBKEY_SHA256="SHA256:$(openssl rsa -in "$SECRET_PATH" -pubout -outform DER 2>/dev/null | openssl dgst -sha256 -binary | openssl enc -base64)"
 
 # This is for compatibility purposes, old bash does not do ^^
