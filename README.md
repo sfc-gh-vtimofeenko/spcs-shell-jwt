@@ -1,5 +1,5 @@
 This is a reference JWT > authentication token exchange mechanism written in
-shell script that implements [Snowpark Container Services programamtic
+shell script that implements [Snowpark Container Services programmatic
 access][doc].
 
 It is useful on its own in environments where python or the cryptography/pyJWT
