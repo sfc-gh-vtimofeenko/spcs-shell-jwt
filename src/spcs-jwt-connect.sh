@@ -74,8 +74,7 @@ JWT=$(
 )
 
 # Exchange the JWT for access token
-# NOTE: URL _does_ care about "_" vs "-"
-TOKEN=$(curl --location "https://${SNOWFLAKE_ACCOUNT//_/-}.snowflakecomputing.com/oauth/token" \
+TOKEN=$(curl --location "https://${SNOWFLAKE_ACCOUNT}.snowflakecomputing.com/oauth/token" \
   --header 'Content-Type: application/x-www-form-urlencoded' \
   --fail `# Fail on error` \
   -s `# just the request body` \
