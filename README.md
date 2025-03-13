@@ -5,17 +5,36 @@ access][doc].
 It is useful on its own in environments where python or the cryptography/pyJWT
 dependencies are not available.
 
+# Usage
+
+## Generating JWT through Snowflake CLI
+
+Run the script as:
+
+``` shell
+JWT=$(snow connection generate-jwt) ./src/spcs-jwt-connect.sh
+```
+
+## Generating JWT without Snowflake CLI
+
+This approach requires either specifying environment variables or providing
+replies to the script live. See the [script source][./src/spcs-jwt-connect.sh]
+for more information.
+
 # Installation
 
-- `jwt-cli`
+Install:
+
+- `jwt-cli` (or Snowflake CLI >=3.3.0)
 - `curl`
 
 `nix` is optional, but it is used for the CI and development.
 
 # Limitations
 
-1. Passphrase-protected keys are not supported. If the key is protected by a
-   passphrase, use Snowflake CLI to generate the JWT and remaining curl commands
+1. Passphrase-protected keys are not supported when generating a key using
+   `jwt-cli`. If the key is protected by a passphrase, use Snowflake CLI to
+   generate the JWT and remaining curl commands
 2. `OPENSSH PRIVATE KEY` keys are not supported, the key must be RSA
 
 # See also
