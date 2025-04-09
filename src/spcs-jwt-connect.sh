@@ -62,6 +62,7 @@ if [ -z "${JWT-}" ]; then
   # This is for compatibility purposes, old bash does not do ^^
   _ACCOUNT_UPPERCASE=$(echo "$SNOWFLAKE_ACCOUNT" | tr '[:lower:]' '[:upper:]') # tr should be fine here, the data should be ascii. Awk is a heavier dependency.
   _USERNAME_UPPERCASE=$(echo "$SNOWFLAKE_USER" | tr '[:lower:]' '[:upper:]')
+  _ROLE_UPPERCASE=$(echo "$ROLE_WITH_ACCESS_TO_ENDPOINT" | tr '[:lower:]' '[:upper:]')
 
   # NOTE: (jwt-tool specific) key has to have `pem` file extension
   # See https://github.com/mike-engel/jwt-cli/issues/56
@@ -88,7 +89,7 @@ TOKEN=$(curl --location "https://${SNOWFLAKE_ACCOUNT}.snowflakecomputing.com/oau
   --fail `# Fail on error` \
   --silent \
   --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer' \
-  --data-urlencode "scope=session:role:$ROLE_WITH_ACCESS_TO_ENDPOINT $ENDPOINT_URL" \
+  --data-urlencode "scope=session:role:$_ROLE_UPPERCASE $ENDPOINT_URL" \
   --data-urlencode "assertion=$JWT")
 
 # Get the SPCS endpoint
