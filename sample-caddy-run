@@ -1,0 +1,26 @@
+#!/usr/bin/env bash
+#
+# This is a one-liner that launches Caddy which will proxy the authentication
+# into Snowflake using programmatic access tokens Required parameters:
+# 1. $ENDPOINT_URL: output of SHOW SERVICE ENDPOINTS IN SERVICE (note, no path
+#   needed)
+# 2. PAT: ALTER USER ADD PROGRAMMATIC ACCESS TOKEN <someName> (see
+#   https://docs.snowflake.com/en/user-guide/programmatic-access-tokens#generating-a-programmatic-access-token)
+#
+# Further reading
+# - About Caddy: https://caddyserver.com/
+#
+
+cat <<EOF | caddy run --adapter caddyfile --config -
+{
+  auto_https off
+}
+http://localhost:8080 {
+  log
+  reverse_proxy https://$ENDPOINT_URL {
+    header_up Host {upstream_hostport}
+    header_up +Authorization "Snowflake Token=\"$PAT\""
+  }
+}
+EOF
+
