@@ -10,6 +10,7 @@
 # Further reading
 # - About Caddy: https://caddyserver.com/
 #
+set -euo pipefail
 
 cat <<EOF | caddy run --adapter caddyfile --config -
 {
