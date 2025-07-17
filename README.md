@@ -1,3 +1,22 @@
+> [!IMPORTANT]
+> Snowflake now allows direct access to SPCS endpoints using PAT without going
+> through token exchange. Code in this repo is kept up for historic purposes,
+> but now there is an easier way.
+
+
+For one-off calls to SPCS endpoints using `curl`:
+
+```shell
+curl --location 'https://$URL/$URL_PATH' \
+    --header 'Authorization: Snowflake Token="$PAT"' \
+    --header 'Content-Type: application/x-www-form-urlencoded'
+```
+
+For a proxy that will inject Authorization header into requests to service in
+SPCS see [`sample-caddy-run`](./sample-caddy-run)
+
+---
+
 This is a reference JWT > authentication token exchange mechanism written in
 shell script that implements [Snowpark Container Services programmatic
 access][doc].
