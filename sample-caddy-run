@@ -1,7 +1,12 @@
 #!/usr/bin/env bash
 #
 # This is a one-liner that launches Caddy which will proxy the authentication
-# into Snowflake using programmatic access tokens Required parameters:
+# into Snowflake using programmatic access tokens.
+#
+# The launched proxy lacks any authentication on the visiting user side, so
+# it's not usable for production as is.
+#
+# Required parameters:
 # 1. $ENDPOINT_URL: output of SHOW SERVICE ENDPOINTS IN SERVICE (note, no path
 #   needed)
 # 2. PAT: ALTER USER ADD PROGRAMMATIC ACCESS TOKEN <someName> (see
