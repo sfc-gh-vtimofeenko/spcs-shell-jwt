@@ -96,7 +96,7 @@
                   '';
               }
             ];
-            packages = pkgDeps;
+            packages = pkgDeps ++ [ pkgs.caddy ];
           };
 
           devShells.pre-commit = config.pre-commit.devShell;
