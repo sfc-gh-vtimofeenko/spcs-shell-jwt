@@ -8,7 +8,7 @@ For one-off calls to SPCS endpoints using `curl`:
 
 ```shell
 curl --location 'https://$URL/$URL_PATH' \
-    --header 'Authorization: Snowflake Token="$PAT"' \
+    --header "Authorization: Snowflake Token=\"$PAT\"" \
     --header 'Content-Type: application/x-www-form-urlencoded'
 ```
 
